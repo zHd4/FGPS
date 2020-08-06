@@ -5,7 +5,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,17 +73,5 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setTitle("");
         dialogBuilder.setMessage(text);
         dialogBuilder.show();
-                /*.setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        dialog.cancel();
-                    }
-                })
-                .show();*/
-
     }
 }
