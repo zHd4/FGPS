@@ -19,9 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        requirePermission(Manifest.permission.ACCESS_FINE_LOCATION);
-        requirePermission(Manifest.permission.ACCESS_COARSE_LOCATION);
+        requireLocationAccessPermission();
 
         Button randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
         FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
@@ -84,8 +82,11 @@ public class MainActivity extends AppCompatActivity {
         longitude.setText(String.valueOf(geo.getRandomLongitude()));
     }
 
-    private void requirePermission(String permission) {
-        ActivityCompat.requestPermissions(this, new String[]{ permission }, 23);
+    private void requireLocationAccessPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        }, 23);
     }
 
     private void showMessage(String text) {
