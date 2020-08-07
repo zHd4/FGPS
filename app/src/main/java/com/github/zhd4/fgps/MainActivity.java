@@ -4,6 +4,7 @@ import android.Manifest;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        requirePermission(Manifest.permission.ACCESS_COARSE_LOCATION);
         requirePermission(Manifest.permission.ACCESS_FINE_LOCATION);
+        requirePermission(Manifest.permission.ACCESS_COARSE_LOCATION);
 
+        Button randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
         FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
 
         final EditText latitude = findViewById(R.id.latitude);
@@ -29,8 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         final Geo geo = new Geo();
 
-        latitude.setText(String.valueOf(geo.getRandomLatitude()));
-        longitude.setText(String.valueOf(geo.getRandomLongitude()));
+        Coordinates currentCoords = geo.getCurrentLocation(this, getApplicationContext());
+
+        latitude.setText(String.valueOf(currentCoords.getLatitude()));
+        longitude.setText(String.valueOf(currentCoords.getLongitude()));
+
+        randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                latitude.setText(String.valueOf(geo.getRandomLatitude()));
+                longitude.setText(String.valueOf(geo.getRandomLongitude()));
+            }
+        });
 
         toggleGpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                         Double.parseDouble(longitude.getText().toString())
                 );
 
-                if(!geo.setMock(MainActivity.this, coordinates)) {
-                    showMessage("Go to Setting -> System -> Developer Options -> Select mock location app");
+                if(!geo.mockLocation(MainActivity.this, coordinates)) {
+                    showMessage(getResources().getString(R.string.allowMockMessage));
                 }
             }
         });
@@ -69,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showMessage(String text) {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        dialogBuilder.setTitle("");
-        dialogBuilder.setMessage(text);
-        dialogBuilder.show();
+        new AlertDialog.Builder(MainActivity.this).setTitle("").setMessage(text).show();
     }
 }

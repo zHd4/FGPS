@@ -1,13 +1,16 @@
 package com.github.zhd4.fgps.geo;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
 import android.os.SystemClock;
+import androidx.core.app.ActivityCompat;
 
 public class Geo {
     static {
@@ -15,14 +18,28 @@ public class Geo {
     }
 
     public native double getRandomLatitude();
+
     public native double getRandomLongitude();
 
     @SuppressLint("ObsoleteSdkInt")
     @SuppressWarnings("deprecation")
-    public boolean setMock(Activity activity, Coordinates coordinates) {
+    public boolean mockLocation(Activity activity, Coordinates coordinates) {
         try {
             Location location = this.createNewLocation(coordinates);
             LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+            manager.addTestProvider(
+                    LocationManager.GPS_PROVIDER,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true,
+                    true,
+                    0,
+                    0
+            );
 
             manager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true);
 
@@ -42,6 +59,22 @@ public class Geo {
         }
     }
 
+    public Coordinates getCurrentLocation(Activity activity, Context context) {
+        LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+            return null;
+        }
+
+        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        return new Coordinates(roundCoordinate(location.getLatitude()), roundCoordinate(location.getLongitude()));
+    }
+
     @SuppressLint("ObsoleteSdkInt")
     private Location createNewLocation(Coordinates coordinates) {
         Location location = new Location(LocationManager.GPS_PROVIDER);
@@ -59,5 +92,10 @@ public class Geo {
         }
 
         return location;
+    }
+
+    @SuppressLint("DefaultLocale")
+    private double roundCoordinate(double coordinate) {
+        return Double.parseDouble(String.format("%.6f", coordinate));
     }
 }

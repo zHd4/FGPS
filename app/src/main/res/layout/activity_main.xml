@@ -39,7 +39,7 @@
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
+                android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/latitude"
                 android:id="@+id/latitude" app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
+                android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/longitude"
                 android:id="@+id/longitude" app:layout_constraintBottom_toBottomOf="parent"
