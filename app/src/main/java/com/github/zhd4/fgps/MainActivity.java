@@ -33,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
         Coordinates currentCoords = geo.getCurrentLocation(this, getApplicationContext());
 
-        latitude.setText(String.valueOf(currentCoords.getLatitude()));
-        longitude.setText(String.valueOf(currentCoords.getLongitude()));
+        if(currentCoords != null) {
+            latitude.setText(String.valueOf(currentCoords.getLatitude()));
+            longitude.setText(String.valueOf(currentCoords.getLongitude()));
+        } else {
+            setRandomCoordinates(latitude, longitude, geo);
+        }
 
         randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                latitude.setText(String.valueOf(geo.getRandomLatitude()));
-                longitude.setText(String.valueOf(geo.getRandomLongitude()));
+                setRandomCoordinates(latitude, longitude, geo);
             }
         });
 
@@ -74,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setRandomCoordinates(final EditText latitude, final EditText longitude, final Geo geo) {
+        latitude.setText(String.valueOf(geo.getRandomLatitude()));
+        longitude.setText(String.valueOf(geo.getRandomLongitude()));
     }
 
     private void requirePermission(String permission) {

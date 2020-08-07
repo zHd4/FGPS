@@ -72,6 +72,10 @@ public class Geo {
 
         Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+        if(location != null) {
+            return null;
+        }
+
         return new Coordinates(roundCoordinate(location.getLatitude()), roundCoordinate(location.getLongitude()));
     }
 
