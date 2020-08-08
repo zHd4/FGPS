@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps.geo;
+package com.github.zhd4.fgps.models.geo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -18,7 +18,6 @@ public class Geo {
     }
 
     public native double getRandomLatitude();
-
     public native double getRandomLongitude();
 
     @SuppressLint("ObsoleteSdkInt")
@@ -28,18 +27,22 @@ public class Geo {
             Location location = this.createNewLocation(coordinates);
             LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
-            manager.addTestProvider(
-                    LocationManager.GPS_PROVIDER,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    true,
-                    true,
-                    0,
-                    0
-            );
+            try {
+                manager.addTestProvider(
+                        LocationManager.GPS_PROVIDER,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        true,
+                        true,
+                        0,
+                        0
+                );
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
 
             manager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true);
 
@@ -59,6 +62,7 @@ public class Geo {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     public Coordinates getCurrentLocation(Activity activity, Context context) {
         LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 

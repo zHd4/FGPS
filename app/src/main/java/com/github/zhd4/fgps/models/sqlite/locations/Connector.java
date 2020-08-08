@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps.sqlite;
+package com.github.zhd4.fgps.models.sqlite.locations;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

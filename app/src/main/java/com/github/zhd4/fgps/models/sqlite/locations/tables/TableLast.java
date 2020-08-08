@@ -1,10 +1,11 @@
-package com.github.zhd4.fgps.sqlite;
+package com.github.zhd4.fgps.models.sqlite.locations.tables;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.github.zhd4.fgps.geo.Coordinates;
+import com.github.zhd4.fgps.models.geo.Coordinates;
+import com.github.zhd4.fgps.models.sqlite.locations.ITable;
 
 public class TableLast implements ITable {
     private static final String TABLE_LAST = "last";
@@ -16,7 +17,7 @@ public class TableLast implements ITable {
     public TableLast(SQLiteDatabase writableDatabase) {
         this.writableDatabase = writableDatabase;
 
-        createTable();
+        create();
     }
 
     public Coordinates getCoordinates() {
@@ -50,7 +51,7 @@ public class TableLast implements ITable {
     }
 
     @Override
-    public void createTable() {
+    public void create() {
         writableDatabase.execSQL(
                 String.format("CREATE TABLE IF NOT EXISTS %s(%s TEXT, %s TEXT)",
                         TABLE_LAST,
@@ -60,12 +61,12 @@ public class TableLast implements ITable {
     }
 
     @Override
-    public void clearTable() {
+    public void clear() {
         writableDatabase.execSQL(String.format("DELETE FROM %s", TABLE_LAST));
     }
 
     @Override
-    public void closeTable() {
+    public void close() {
         writableDatabase.close();
     }
 }

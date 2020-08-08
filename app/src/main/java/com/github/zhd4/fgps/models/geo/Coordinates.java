@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps.geo;
+package com.github.zhd4.fgps.models.geo;
 
 public class Coordinates {
     private final double latitude;

@@ -10,8 +10,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
-import com.github.zhd4.fgps.geo.Coordinates;
-import com.github.zhd4.fgps.geo.Geo;
+import com.github.zhd4.fgps.controllers.MockLocationController;
+import com.github.zhd4.fgps.controllers.MockLocationResult;
+import com.github.zhd4.fgps.models.geo.Coordinates;
+import com.github.zhd4.fgps.models.geo.Geo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         requireLocationAccessPermission();
 
         Button randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
-        FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
+        final FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
 
         final EditText latitude = findViewById(R.id.latitude);
         final EditText longitude = findViewById(R.id.longitude);
@@ -53,8 +55,31 @@ public class MainActivity extends AppCompatActivity {
                         Double.parseDouble(longitude.getText().toString())
                 );
 
-                if(!geo.mockLocation(MainActivity.this, coordinates)) {
+                /*if(!geo.mockLocation(MainActivity.this, coordinates)) {
                     showMessage(getResources().getString(R.string.allowMockMessage));
+                }*/
+
+                MockLocationController mockController = new MockLocationController(
+                        getApplicationContext(),MainActivity.this, geo
+                );
+
+                if(!mockController.isMockRunning()) {
+                    MockLocationResult startMockResult = mockController.startMock(coordinates);
+
+                    if(startMockResult.equals(MockLocationResult.SUCCESS)) {
+                        toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
+                    } else if(startMockResult.equals(MockLocationResult.FAIL)) {
+                        showMessage(getResources().getString(R.string.allowMockMessage));
+                    }
+                } else {
+                    MockLocationResult stopMockResult = mockController.stopMock();
+
+                    if(stopMockResult.equals(MockLocationResult.SUCCESS) ||
+                            stopMockResult.equals(MockLocationResult.IGNORE)) {
+                        toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
+                    } else if(stopMockResult.equals(MockLocationResult.FAIL)) {
+                        showMessage(getResources().getString(R.string.allowMockMessage));
+                    }
                 }
             }
         });
