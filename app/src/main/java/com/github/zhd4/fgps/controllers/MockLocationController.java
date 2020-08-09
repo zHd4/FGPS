@@ -22,11 +22,10 @@ public class MockLocationController {
         Connector sqliteConnector = new Connector(context);
         TableLast table = new TableLast(sqliteConnector.getWritableDatabase());
 
-        Coordinates state = table.getCoordinates();
-
+        boolean isEmpty = table.isEmpty();
         table.close();
 
-        return state != null;
+        return !isEmpty;
     }
 
     public MockLocationResult startMock(Coordinates newCoordinates) {

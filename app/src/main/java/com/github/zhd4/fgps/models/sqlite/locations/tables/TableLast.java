@@ -16,29 +16,33 @@ public class TableLast implements ITable {
 
     public TableLast(SQLiteDatabase writableDatabase) {
         this.writableDatabase = writableDatabase;
-
         create();
+    }
+
+    public boolean isEmpty(){
+        Cursor cursor = writableDatabase.rawQuery(String.format("SELECT * FROM %s", TABLE_LAST), null);
+        int count = cursor.getCount();
+
+        cursor.close();
+        return count == 0;
     }
 
     public Coordinates getCoordinates() {
         double latitude = 0;
         double longitude = 0;
 
-        try {
-            @SuppressLint("Recycle")
-            Cursor cursor = writableDatabase.rawQuery(String.format("SELECT * FROM %s", TABLE_LAST), null);
+        @SuppressLint("Recycle")
+        Cursor cursor = writableDatabase.rawQuery(String.format("SELECT * FROM %s", TABLE_LAST), null);
 
-            if (cursor.moveToFirst()) {
-                latitude = Double.parseDouble(cursor.getString(0));
-                longitude = Double.parseDouble(cursor.getString(1));
-            }
+        if (cursor.moveToFirst()) {
 
-            return new Coordinates(latitude, longitude);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return null;
+            latitude = Double.parseDouble(cursor.getString(1));
+            longitude = Double.parseDouble(cursor.getString(2));
         }
+
+        cursor.close();
+
+        return new Coordinates(latitude, longitude);
     }
 
     public void setCoordinates(Coordinates coordinates) {
@@ -55,8 +59,7 @@ public class TableLast implements ITable {
         writableDatabase.execSQL(
                 String.format("CREATE TABLE IF NOT EXISTS %s(%s TEXT, %s TEXT)",
                         TABLE_LAST,
-                        KEY_LATITUDE,
-                        KEY_LONGITUDE)
+                        KEY_LATITUDE, KEY_LONGITUDE)
         );
     }
 

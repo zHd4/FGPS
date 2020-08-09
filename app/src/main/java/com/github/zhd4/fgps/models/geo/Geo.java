@@ -40,9 +40,7 @@ public class Geo {
                         0,
                         0
                 );
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            }
+            } catch (IllegalArgumentException ignored) { }
 
             manager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true);
 
@@ -62,7 +60,6 @@ public class Geo {
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
     public Coordinates getCurrentLocation(Activity activity, Context context) {
         LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
@@ -76,11 +73,11 @@ public class Geo {
 
         Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        if(location != null) {
+        try {
+            return new Coordinates(roundCoordinate(location.getLatitude()), roundCoordinate(location.getLongitude()));
+        } catch (NullPointerException e) {
             return null;
         }
-
-        return new Coordinates(roundCoordinate(location.getLatitude()), roundCoordinate(location.getLongitude()));
     }
 
     @SuppressLint("ObsoleteSdkInt")
