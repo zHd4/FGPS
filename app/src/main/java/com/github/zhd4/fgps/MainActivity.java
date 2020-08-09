@@ -55,10 +55,6 @@ public class MainActivity extends AppCompatActivity {
                         Double.parseDouble(longitude.getText().toString())
                 );
 
-                /*if(!geo.mockLocation(MainActivity.this, coordinates)) {
-                    showMessage(getResources().getString(R.string.allowMockMessage));
-                }*/
-
                 MockLocationController mockController = new MockLocationController(
                         getApplicationContext(),MainActivity.this, geo
                 );
