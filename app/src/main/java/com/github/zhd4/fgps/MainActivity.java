@@ -1,6 +1,7 @@
 package com.github.zhd4.fgps;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if(startMockResult.equals(MockLocationResult.SUCCESS)) {
                         toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
+                        toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
                     } else if(startMockResult.equals(MockLocationResult.FAIL)) {
                         showMessage(getResources().getString(R.string.allowMockMessage));
                     }
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     if(stopMockResult.equals(MockLocationResult.SUCCESS) ||
                             stopMockResult.equals(MockLocationResult.IGNORE)) {
                         toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
+                        toggleGpsButton.setColorFilter(Color.rgb(255, 255, 255));
                     } else if(stopMockResult.equals(MockLocationResult.FAIL)) {
                         showMessage(getResources().getString(R.string.allowMockMessage));
                     }

@@ -36,8 +36,8 @@ public class TableLast implements ITable {
 
         if (cursor.moveToFirst()) {
 
-            latitude = Double.parseDouble(cursor.getString(1));
-            longitude = Double.parseDouble(cursor.getString(2));
+            latitude = Double.parseDouble(cursor.getString(0));
+            longitude = Double.parseDouble(cursor.getString(0));
         }
 
         cursor.close();
