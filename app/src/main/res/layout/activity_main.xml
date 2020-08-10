@@ -26,38 +26,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/constraintLayout">
+            android:layout_height="match_parent" android:id="@+id/constraintLayout" tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="-105dp">
         <Button
                 android:text="@string/random"
-                android:layout_width="210dp"
-                android:layout_height="45dp"
+                android:layout_width="130dp"
+                android:layout_height="43dp"
                 android:id="@+id/randomCoordinatesButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:textColor="@android:color/background_light"
-                android:background="@color/colorPrimary" app:layout_constraintVertical_bias="0.51"/>
+                android:background="@color/colorPrimary" app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"/>
         <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
                 android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/latitude"
                 android:id="@+id/latitude" app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.35000002"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0"
                 android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/colorAccent"/>
+                android:textColorLink="@color/colorAccent" app:layout_constraintHorizontal_bias="0.003"/>
         <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
                 android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/longitude"
                 android:id="@+id/longitude" app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.42000002"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0"
                 android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/colorAccent"/>
+                android:textColorLink="@color/colorAccent" app:layout_constraintHorizontal_bias="0.466"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
