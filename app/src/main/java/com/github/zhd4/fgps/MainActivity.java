@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import com.github.zhd4.fgps.controllers.MockLocationController;
 import com.github.zhd4.fgps.controllers.MockLocationResult;
+import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,40 +49,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toggleGpsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Coordinates coordinates = new Coordinates(
-                        Double.parseDouble(latitude.getText().toString()),
-                        Double.parseDouble(longitude.getText().toString())
-                );
-
-                MockLocationController mockController = new MockLocationController(
-                        getApplicationContext(),MainActivity.this, geo
-                );
-
-                if(!mockController.isMockRunning()) {
-                    MockLocationResult startMockResult = mockController.startMock(coordinates);
-
-                    if(startMockResult.equals(MockLocationResult.SUCCESS)) {
-                        toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
-                        toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
-                    } else if(startMockResult.equals(MockLocationResult.FAIL)) {
-                        showMessage(getResources().getString(R.string.allowMockMessage));
-                    }
-                } else {
-                    MockLocationResult stopMockResult = mockController.stopMock();
-
-                    if(stopMockResult.equals(MockLocationResult.SUCCESS) ||
-                            stopMockResult.equals(MockLocationResult.IGNORE)) {
-                        toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
-                        toggleGpsButton.setColorFilter(Color.rgb(255, 255, 255));
-                    } else if(stopMockResult.equals(MockLocationResult.FAIL)) {
-                        showMessage(getResources().getString(R.string.allowMockMessage));
-                    }
-                }
-            }
-        });
+        toggleGpsButton.setOnClickListener(new ToggleGpsOnClickController(
+                geo,
+                getApplicationContext(),
+                this,
+                latitude,
+                longitude,
+                toggleGpsButton
+        ));
     }
 
     @Override
@@ -111,9 +86,5 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         }, 23);
-    }
-
-    private void showMessage(String text) {
-        new AlertDialog.Builder(MainActivity.this).setTitle("").setMessage(text).show();
     }
 }
