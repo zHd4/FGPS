@@ -17,8 +17,16 @@ public class Geo {
         System.loadLibrary("native-lib");
     }
 
-    public native double getRandomLatitude();
-    public native double getRandomLongitude();
+    private native double randomLatitude();
+    private native double randomLongitude();
+
+    public double getRandomLatitude(){
+        return roundCoordinate(randomLatitude());
+    }
+
+    public double getRandomLongitude(){
+        return roundCoordinate(randomLongitude());
+    }
 
     @SuppressLint("ObsoleteSdkInt")
     @SuppressWarnings("deprecation")
