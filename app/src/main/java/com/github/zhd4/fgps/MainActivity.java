@@ -1,18 +1,17 @@
 package com.github.zhd4.fgps;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import com.github.zhd4.fgps.controllers.MockLocationController;
-import com.github.zhd4.fgps.controllers.MockLocationResult;
 import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setRandomCoordinates(latitude, longitude, geo);
         }
+
+        setToggleGpsButtonState(toggleGpsButton, getApplicationContext(), geo);
 
         randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setToggleGpsButtonState(FloatingActionButton toggleGpsButton, Context context, Geo geo) {
+        MockLocationController mockLocationController = new MockLocationController(context,this, geo);
+
+        if(mockLocationController.isMockRunning()) {
+            toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
+            toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
+        }
     }
 
     private void setRandomCoordinates(final EditText latitude, final EditText longitude, final Geo geo) {

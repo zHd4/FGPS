@@ -20,11 +20,11 @@ public class Geo {
     private native double randomLatitude();
     private native double randomLongitude();
 
-    public double getRandomLatitude(){
+    public double getRandomLatitude() {
         return roundCoordinate(randomLatitude());
     }
 
-    public double getRandomLongitude(){
+    public double getRandomLongitude() {
         return roundCoordinate(randomLongitude());
     }
 

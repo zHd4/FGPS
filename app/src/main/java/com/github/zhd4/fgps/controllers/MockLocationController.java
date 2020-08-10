@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
-import com.github.zhd4.fgps.models.sqlite.locations.Connector;
+import com.github.zhd4.fgps.models.sqlite.Connector;
 import com.github.zhd4.fgps.models.sqlite.locations.tables.TableLast;
 
 public class MockLocationController {
