@@ -26,39 +26,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/constraintLayout" tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="-105dp">
+            android:layout_height="match_parent" android:id="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent">
         <Button
                 android:text="@string/random"
                 android:layout_width="130dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:id="@+id/randomCoordinatesButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:textColor="@android:color/background_light"
-                android:background="@color/colorPrimaryDark" app:layout_constraintVertical_bias="0.0"
+                android:background="@color/colorPrimaryDark" app:layout_constraintVertical_bias="0.00999999"
                 app:layout_constraintHorizontal_bias="0.97"/>
         <EditText
                 android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/latitude"
                 android:id="@+id/latitude" app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.00999999"
                 android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/colorAccent" app:layout_constraintHorizontal_bias="0.03"
                 android:background="@color/colorPrimaryDark"/>
         <EditText
                 android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:inputType="numberSigned|numberDecimal"
                 android:ems="10"
                 android:hint="@string/longitude"
                 android:id="@+id/longitude" app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.00999999"
                 android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/colorAccent"
                 android:background="@color/colorPrimaryDark" app:layout_constraintHorizontal_bias="0.49"/>
