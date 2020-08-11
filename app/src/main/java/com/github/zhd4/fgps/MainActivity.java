@@ -15,9 +15,18 @@ import com.github.zhd4.fgps.controllers.MockLocationController;
 import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private MapView mapView;
+    private GoogleMap googleMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setRandomCoordinates(latitude, longitude, geo);
+                setPointOnMap();
             }
         });
 
@@ -58,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 longitude,
                 toggleGpsButton
         ));
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(getResources().getString(R.string.apiGoogleMapsKey));
+        }
+
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(mapViewBundle);
+        mapView.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        setPointOnMap();
     }
 
     @Override
@@ -75,6 +100,57 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    private void setPointOnMap() {
+        final EditText latitude = findViewById(R.id.latitude);
+        final EditText longitude = findViewById(R.id.longitude);
+
+        final Coordinates coordinates = new Coordinates(
+                Double.parseDouble(latitude.getText().toString()),
+                Double.parseDouble(longitude.getText().toString())
+        );
+
+        LatLng latLng = new LatLng(coordinates.getLatitude(), coordinates.getLongitude());
+
+        googleMap.clear();
+        googleMap.setMinZoomPreference(3);
+
+        googleMap.addMarker(new MarkerOptions().position(latLng));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     private void setToggleGpsButtonState(FloatingActionButton toggleGpsButton, Context context, Geo geo) {

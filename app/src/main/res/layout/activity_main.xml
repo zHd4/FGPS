@@ -37,7 +37,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:textColor="@android:color/background_light"
-                android:background="@color/colorPrimaryDark" app:layout_constraintVertical_bias="0.00999999"
+                android:background="@color/colorPrimary" app:layout_constraintVertical_bias="0.00999999"
                 app:layout_constraintHorizontal_bias="0.97"/>
         <EditText
                 android:layout_width="120dp"
@@ -72,6 +72,12 @@
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.95"
                 app:layout_constraintVertical_bias="0.959" app:backgroundTint="@color/colorPrimary"
                 android:tint="#FFFFFF"/>
+        <com.google.android.gms.maps.MapView
+                android:layout_width="0dp"
+                android:layout_height="520dp" android:id="@+id/mapView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.93"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
