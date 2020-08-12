@@ -31,9 +31,11 @@ public class EditTextOnChangedController implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if(!ignoring) {
-            MainActivityTools tools = new MainActivityTools();
-            tools.setPointOnMap(googleMap, latitude, longitude);
-        }
+        try {
+            if(!ignoring) {
+                MainActivityTools tools = new MainActivityTools();
+                tools.setPointOnMap(googleMap, latitude, longitude);
+            }
+        } catch (NumberFormatException ignore) { }
     }
 }

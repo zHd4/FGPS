@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.zhd4.fgps.controllers.EditTextOnChangedController;
 import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
+import com.github.zhd4.fgps.models.tools.GUITools;
 import com.github.zhd4.fgps.models.tools.MainActivityTools;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.actionAbout) {
+            GUITools.showMessage(MainActivity.this, getResources().getString(R.string.aboutText));
             return true;
         }
 
