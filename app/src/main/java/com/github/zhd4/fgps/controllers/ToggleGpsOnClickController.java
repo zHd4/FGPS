@@ -47,6 +47,9 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
             if(startMockResult.equals(MockLocationResult.SUCCESS)) {
                 toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
                 toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
+
+                GUITools.showToast(activity.getResources().getString(R.string.mockingAt) + " " +
+                        coordinates.getLatitude() + ", " + coordinates.getLongitude(), context);
             } else if(startMockResult.equals(MockLocationResult.FAIL)) {
                 GUITools.showMessage(activity, activity.getResources().getString(R.string.allowMockMessage));
             }
@@ -57,6 +60,8 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
                     stopMockResult.equals(MockLocationResult.IGNORE)) {
                 toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
                 toggleGpsButton.setColorFilter(Color.rgb(255, 255, 255));
+
+                GUITools.showToast(activity.getResources().getString(R.string.mockingStopped), context);
             } else if(stopMockResult.equals(MockLocationResult.FAIL)) {
                 GUITools.showMessage(activity, activity.getResources().getString(R.string.allowMockMessage));
             }

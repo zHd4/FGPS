@@ -6,4 +6,6 @@
     <string name="longitude">Longitude</string>
     <string name="random">RANDOM</string>
     <string name="allowMockMessage">Go to Setting -> System -> Developer Options -> Select mock location app</string>
+    <string name="mockingAt">Mocking at</string>
+    <string name="mockingStopped">Mocking Stopped</string>
 </resources>

@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ));
 
         Bundle mapViewBundle = null;
+
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(getResources().getString(R.string.apiGoogleMapsKey));
         }
@@ -102,8 +103,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.addMarker(markerOptions);
 
+                EditTextOnChangedController.setIgnoring(true);
+
                 latitude.setText(String.valueOf(geo.roundCoordinate(latLng.latitude)));
                 longitude.setText(String.valueOf(geo.roundCoordinate(latLng.longitude)));
+
+                EditTextOnChangedController.setIgnoring(false);
             }
         });
 

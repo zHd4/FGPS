@@ -26,7 +26,7 @@ public class MainActivityTools {
         LatLng latLng = new LatLng(coordinates.getLatitude(), coordinates.getLongitude());
 
         googleMap.clear();
-        googleMap.setMinZoomPreference(5);
+        googleMap.setMinZoomPreference(4);
 
         googleMap.addMarker(new MarkerOptions().position(latLng));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
