@@ -43,8 +43,8 @@ public class MainActivityTools {
     }
 
     public void setRandomCoordinates(final EditText latitude, final EditText longitude, final Geo geo) {
-        latitude.setText(String.valueOf(geo.getRandomLatitude()));
-        longitude.setText(String.valueOf(geo.getRandomLongitude()));
+        latitude.setText(String.valueOf(geo.getRandomLatitude()).replace(',', '.'));
+        longitude.setText(String.valueOf(geo.getRandomLongitude()).replace(',', '.'));
     }
 
     public void requireLocationAccessPermission(Activity activity) {

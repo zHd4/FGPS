@@ -22,14 +22,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private final MainActivityTools tools = new MainActivityTools();
-
     private MapView mapView;
+
     private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mapView = findViewById(R.id.mapView);
 
         tools.requireLocationAccessPermission(MainActivity.this);
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Coordinates currentCoords = geo.getCurrentLocation(this, getApplicationContext());
 
-        if(currentCoords != null) {
+        if (currentCoords != null) {
             latitude.setText(String.valueOf(currentCoords.getLatitude()));
             longitude.setText(String.valueOf(currentCoords.getLongitude()));
         } else {
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapViewBundle = savedInstanceState.getBundle(getResources().getString(R.string.apiGoogleMapsKey));
         }
 
-        mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
     }
