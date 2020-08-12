@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps;
+package com.github.zhd4.fgps.models.tools;
 
 import android.app.Activity;
 import androidx.appcompat.app.AlertDialog;

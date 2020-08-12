@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
-import com.github.zhd4.fgps.GUITools;
+import com.github.zhd4.fgps.models.tools.GUITools;
 import com.github.zhd4.fgps.R;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;

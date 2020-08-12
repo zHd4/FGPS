@@ -108,7 +108,7 @@ public class Geo {
     }
 
     @SuppressLint("DefaultLocale")
-    private double roundCoordinate(double coordinate) {
+    public double roundCoordinate(double coordinate) {
         return Double.parseDouble(String.format("%.6f", coordinate));
     }
 }
