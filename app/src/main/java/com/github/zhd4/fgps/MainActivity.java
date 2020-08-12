@@ -1,8 +1,6 @@
 package com.github.zhd4.fgps;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         tools.requireLocationAccessPermission(MainActivity.this);
 
-        Button randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
+        FloatingActionButton randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
         final FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
 
         final EditText latitude = findViewById(R.id.latitude);

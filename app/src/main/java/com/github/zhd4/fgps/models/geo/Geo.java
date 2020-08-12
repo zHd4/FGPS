@@ -109,6 +109,6 @@ public class Geo {
 
     @SuppressLint("DefaultLocale")
     public double roundCoordinate(double coordinate) {
-        return Double.parseDouble(String.format("%.6f", coordinate));
+        return Double.parseDouble(String.format("%.9f", coordinate));
     }
 }
