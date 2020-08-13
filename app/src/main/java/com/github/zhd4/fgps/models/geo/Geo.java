@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Build;
 import android.os.SystemClock;
 import androidx.core.app.ActivityCompat;
@@ -17,9 +16,6 @@ public class Geo {
         System.loadLibrary("native-lib");
     }
 
-    private native double randomLatitude();
-    private native double randomLongitude();
-
     public double getRandomLatitude() {
         return roundCoordinate(randomLatitude());
     }
@@ -28,44 +24,43 @@ public class Geo {
         return roundCoordinate(randomLongitude());
     }
 
-    @SuppressLint("ObsoleteSdkInt")
-    @SuppressWarnings("deprecation")
+    @SuppressLint("DefaultLocale")
+    public double roundCoordinate(double coordinate) {
+        return Double.parseDouble(String.format("%.9f", coordinate).replace(',', '.'));
+    }
+
     public boolean mockLocation(Activity activity, Coordinates coordinates) {
         try {
-            Location location = this.createNewLocation(coordinates);
-            LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-            try {
-                manager.addTestProvider(
-                        LocationManager.GPS_PROVIDER,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        true,
-                        0,
-                        0
-                );
-            } catch (IllegalArgumentException ignored) { }
-
-            manager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true);
-
-            manager.setTestProviderStatus(
-                    LocationManager.GPS_PROVIDER,
-                    LocationProvider.AVAILABLE,
-                    null,
-                    System.currentTimeMillis()
-            );
-
-            manager.setTestProviderLocation(LocationManager.GPS_PROVIDER, location);
+            mockLocation(activity, coordinates, LocationManager.GPS_PROVIDER);
+            mockLocation(activity, coordinates, LocationManager.NETWORK_PROVIDER);
 
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    public void mockLocation(Activity activity, Coordinates coordinates, String provider) {
+        Location location = this.createNewLocation(coordinates, provider);
+        LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+        try {
+            manager.addTestProvider(
+                    provider,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true,
+                    0,
+                    5);
+        } catch (IllegalArgumentException ignored) { }
+
+        manager.setTestProviderEnabled(provider, true);
+        manager.setTestProviderLocation(provider, location);
     }
 
     public Coordinates getCurrentLocation(Activity activity, Context context) {
@@ -89,26 +84,38 @@ public class Geo {
     }
 
     @SuppressLint("ObsoleteSdkInt")
-    private Location createNewLocation(Coordinates coordinates) {
-        Location location = new Location(LocationManager.GPS_PROVIDER);
+    private Location createNewLocation(Coordinates coordinates, String provider) {
+        Location location = new Location(provider);
 
-        location.setAltitude(0);
-        location.setAccuracy(0);
+        location.setBearing(1F);
+        location.setAccuracy(3F);
 
+        location.setSpeed(0.01F);
+        location.setAltitude(3F);
         location.setTime(System.currentTimeMillis());
 
         location.setLatitude(coordinates.getLatitude());
         location.setLongitude(coordinates.getLongitude());
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            location.setBearingAccuracyDegrees(0.1F);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            location.setVerticalAccuracyMeters(0.1F);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            location.setSpeedAccuracyMetersPerSecond(0.01F);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             location.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());
         }
 
         return location;
     }
 
-    @SuppressLint("DefaultLocale")
-    public double roundCoordinate(double coordinate) {
-        return Double.parseDouble(String.format("%.9f", coordinate).replace(',', '.'));
-    }
+    private native double randomLatitude();
+    private native double randomLongitude();
 }
