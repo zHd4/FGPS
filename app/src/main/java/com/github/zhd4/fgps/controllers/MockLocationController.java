@@ -56,6 +56,7 @@ public class MockLocationController {
         if(lastCoords != null) {
             if(geo.mockLocation(activity, lastCoords)) {
                 table.clear();
+                geo.unmockLocation(activity);
             } else {
                 result = MockLocationResult.FAIL;
             }

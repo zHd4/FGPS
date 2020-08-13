@@ -41,7 +41,7 @@ public class Geo {
     }
 
     @SuppressLint("ObsoleteSdkInt")
-    public void mockLocation(Activity activity, Coordinates coordinates, String provider) {
+    private void mockLocation(Activity activity, Coordinates coordinates, String provider) {
         Location location = this.createNewLocation(coordinates, provider);
         LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 
@@ -61,6 +61,22 @@ public class Geo {
 
         manager.setTestProviderEnabled(provider, true);
         manager.setTestProviderLocation(provider, location);
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    public void unmockLocation(Activity activity) {
+        try {
+            unmockLocation(activity, LocationManager.GPS_PROVIDER);
+            unmockLocation(activity, LocationManager.NETWORK_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private void unmockLocation(Activity activity, String provider) {
+        LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        manager.removeTestProvider(provider);
     }
 
     public Coordinates getCurrentLocation(Activity activity, Context context) {
