@@ -150,16 +150,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onStop();
         mapView.onStop();
     }
+
     @Override
     protected void onPause() {
         mapView.onPause();
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         mapView.onDestroy();
         super.onDestroy();
     }
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();
