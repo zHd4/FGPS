@@ -4,7 +4,9 @@
     <string name="action_about">About</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
-    <string name="allowMockMessage">Go to Setting -> System -> Developer Options -> Select mock location app</string>
+    <string name="allowMockMessage">
+        Go to Setting -> System -> Developer Options -> Select mock location app\n\nIf you using Android 10 or mocking not working, before fake gps activation TURN OFF location in the Settings.
+    </string>
     <string name="mockingAt">Mocking at</string>
     <string name="mockingStopped">Mocking Stopped</string>
     <string name="aboutText">
