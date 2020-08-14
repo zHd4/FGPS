@@ -35,7 +35,10 @@ public class MockLocationController {
         TableLast table = new TableLast(sqliteConnector.getWritableDatabase());
 
         if(geo.mockLocation(activity, newCoordinates)) {
-            table.setCoordinates(geo.getCurrentLocation(activity, context));
+            Coordinates currentLocation = geo.getCurrentLocation(activity, context);
+            Coordinates randomLocation = new Coordinates(geo.getRandomLatitude(), geo.getRandomLongitude());
+
+            table.setCoordinates(currentLocation != null ? currentLocation : randomLocation);
         } else {
             result = MockLocationResult.FAIL;
         }

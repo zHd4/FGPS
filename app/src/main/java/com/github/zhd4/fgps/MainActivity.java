@@ -22,8 +22,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private final MainActivityTools tools = new MainActivityTools();
-    private MapView mapView;
 
+    private MapView mapView;
     private GoogleMap googleMap;
 
     @Override

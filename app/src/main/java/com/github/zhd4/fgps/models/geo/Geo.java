@@ -55,8 +55,8 @@ public class Geo {
                     false,
                     true,
                     true,
-                    0,
-                    5);
+                    1,
+                    1);
         } catch (IllegalArgumentException ignored) { }
 
         manager.setTestProviderEnabled(provider, true);
