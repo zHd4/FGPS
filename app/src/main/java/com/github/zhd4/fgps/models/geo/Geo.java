@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -31,36 +32,31 @@ public class Geo {
 
     public boolean mockLocation(Activity activity, Coordinates coordinates) {
         try {
-            mockLocation(activity, coordinates, LocationManager.GPS_PROVIDER);
-            mockLocation(activity, coordinates, LocationManager.NETWORK_PROVIDER);
+            LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+            String provider = manager.getBestProvider(new Criteria(), false);
+            Location location = this.createNewLocation(coordinates, provider);
+
+            try {
+                manager.addTestProvider(
+                        provider,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        true,
+                        1,
+                        1);
+            } catch (IllegalArgumentException ignored) { }
+
+            manager.setTestProviderEnabled(provider, true);
+            manager.setTestProviderLocation(provider, location);
 
             return true;
         } catch (Exception e) {
             return false;
         }
-    }
-
-    @SuppressLint("ObsoleteSdkInt")
-    private void mockLocation(Activity activity, Coordinates coordinates, String provider) {
-        Location location = this.createNewLocation(coordinates, provider);
-        LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-        try {
-            manager.addTestProvider(
-                    provider,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    true,
-                    1,
-                    1);
-        } catch (IllegalArgumentException ignored) { }
-
-        manager.setTestProviderEnabled(provider, true);
-        manager.setTestProviderLocation(provider, location);
     }
 
     @SuppressWarnings("SpellCheckingInspection")
@@ -107,7 +103,7 @@ public class Geo {
         location.setAccuracy(3F);
 
         location.setSpeed(0.01F);
-        location.setAltitude(3F);
+        location.setAltitude(location.getAltitude());
         location.setTime(System.currentTimeMillis());
 
         location.setLatitude(coordinates.getLatitude());
