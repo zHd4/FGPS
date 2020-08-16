@@ -2,18 +2,14 @@ package com.github.zhd4.fgps.models.tools;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.widget.EditText;
 import androidx.core.app.ActivityCompat;
-import com.github.zhd4.fgps.controllers.MockLocationController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivityTools {
     public void setPointOnMap(GoogleMap googleMap, final EditText latitude, final EditText longitude) {
@@ -30,16 +26,6 @@ public class MainActivityTools {
 
         googleMap.addMarker(new MarkerOptions().position(latLng));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-    }
-
-    public void setToggleGpsButtonState(FloatingActionButton toggleGpsButton, Context context,
-                                         Activity activity, Geo geo) {
-        MockLocationController mockLocationController = new MockLocationController(context,activity, geo);
-
-        if(mockLocationController.isMockRunning()) {
-            toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
-            toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
-        }
     }
 
     public void setRandomCoordinates(final EditText latitude, final EditText longitude, final Geo geo) {

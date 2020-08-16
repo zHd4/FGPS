@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             tools.setRandomCoordinates(latitude, longitude, geo);
         }
 
-        tools.setToggleGpsButtonState(toggleGpsButton, getApplicationContext(), MainActivity.this, geo);
-
         randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -20,6 +20,8 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
     private final EditText longitude;
     private final FloatingActionButton toggleGpsButton;
 
+    private boolean running;
+
     public ToggleGpsOnClickController(Geo geo, Context context, Activity activity,
                                       EditText latitude, EditText longitude, FloatingActionButton toggleGpsButton) {
         this.geo = geo;
@@ -37,33 +39,32 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
                 Double.parseDouble(longitude.getText().toString())
         );
 
-        MockLocationController mockController = new MockLocationController(
-                context, activity, geo
-        );
+        MockLocationController mockController = new MockLocationController(activity, geo);
 
-        if(!mockController.isMockRunning()) {
+        if(!this.running) {
             MockLocationResult startMockResult = mockController.startMock(coordinates);
 
             if(startMockResult.equals(MockLocationResult.SUCCESS)) {
-                toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
-                toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
+                this.running = true;
+                this.toggleGpsButton.setImageResource(android.R.drawable.ic_media_pause);
+                this.toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
 
                 GUITools.showToast(activity.getResources().getString(R.string.mockingAt) + " " +
-                        coordinates.getLatitude() + ", " + coordinates.getLongitude(), context);
+                        coordinates.getLatitude() + ", " + coordinates.getLongitude(), this.context);
             } else if(startMockResult.equals(MockLocationResult.FAIL)) {
-                GUITools.showMessage(activity, activity.getResources().getString(R.string.allowMockMessage));
+                GUITools.showMessage(this.activity, activity.getResources().getString(R.string.allowMockMessage));
             }
         } else {
             MockLocationResult stopMockResult = mockController.stopMock();
 
-            if(stopMockResult.equals(MockLocationResult.SUCCESS) ||
-                    stopMockResult.equals(MockLocationResult.IGNORE)) {
-                toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
-                toggleGpsButton.setColorFilter(Color.rgb(255, 255, 255));
+            if(stopMockResult.equals(MockLocationResult.SUCCESS)) {
+                this.running = false;
+                this.toggleGpsButton.setImageResource(android.R.drawable.ic_media_play);
+                this.toggleGpsButton.setColorFilter(Color.rgb(255, 255, 255));
 
-                GUITools.showToast(activity.getResources().getString(R.string.mockingStopped), context);
+                GUITools.showToast(activity.getResources().getString(R.string.mockingStopped), this.context);
             } else if(stopMockResult.equals(MockLocationResult.FAIL)) {
-                GUITools.showMessage(activity, activity.getResources().getString(R.string.allowMockMessage));
+                GUITools.showMessage(this.activity, activity.getResources().getString(R.string.allowMockMessage));
             }
         }
     }
