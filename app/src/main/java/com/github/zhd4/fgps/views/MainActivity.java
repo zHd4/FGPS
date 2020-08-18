@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Bundle mapViewBundle = null;
 
         if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(getResources().getString(R.string.apiGoogleMapsKey));
+            mapViewBundle = savedInstanceState.getBundle(
+                    savedInstanceState.getString("com.google.android.geo.API_KEY")
+            );
         }
 
         mapView.onCreate(mapViewBundle);

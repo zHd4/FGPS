@@ -18,7 +18,7 @@ public class MockingLocationRunnable implements Runnable {
     public void run() {
         while (geo.mockLocation(activity, coordinates)) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(700);
             } catch (InterruptedException ignored) { }
         }
 
