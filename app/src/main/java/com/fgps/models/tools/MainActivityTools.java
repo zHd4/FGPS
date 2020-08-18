@@ -10,9 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivityTools {
-    public void setPointOnMap(GoogleMap googleMap, double latitude, double longitude) {
-        final Coordinates coordinates = new Coordinates(latitude, longitude);
-
+    public void setPointOnMap(GoogleMap googleMap, final Coordinates coordinates) {
         LatLng latLng = new LatLng(coordinates.getLatitude(), coordinates.getLongitude());
 
         googleMap.clear();

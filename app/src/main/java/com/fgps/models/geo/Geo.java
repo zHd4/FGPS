@@ -17,12 +17,8 @@ public class Geo {
         System.loadLibrary("native-lib");
     }
 
-    public double getRandomLatitude() {
-        return roundCoordinate(randomLatitude());
-    }
-
-    public double getRandomLongitude() {
-        return roundCoordinate(randomLongitude());
+    public Coordinates getRandomCoordinates() {
+        return new Coordinates(roundCoordinate(randomLatitude()), roundCoordinate(randomLongitude()));
     }
 
     @SuppressLint("DefaultLocale")

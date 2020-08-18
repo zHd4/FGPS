@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import com.fgps.models.tools.GUITools;
-import com.fgps.models.geo.Coordinates;
 import com.fgps.models.geo.Geo;
 import com.fgps.views.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,11 +27,10 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Coordinates coordinates = new Coordinates(activity.latitude, activity.longitude);
         MockLocationController mockController = new MockLocationController(activity, geo);
 
         if(!this.running) {
-            MockLocationResult startMockResult = mockController.startMock(coordinates);
+            MockLocationResult startMockResult = mockController.startMock(activity.coordinates);
 
             if(startMockResult.equals(MockLocationResult.SUCCESS)) {
                 this.running = true;
@@ -40,7 +38,7 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
                 this.toggleGpsButton.setColorFilter(Color.rgb(255, 64, 64));
 
                 GUITools.showToast(activity.getResources().getString(R.string.mockingAt) + " " +
-                        coordinates.getLatitude() + ", " + coordinates.getLongitude(), this.context);
+                        activity.coordinates.getLatitude() + ", " + activity.coordinates.getLongitude(), this.context);
             } else if(startMockResult.equals(MockLocationResult.FAIL)) {
                 GUITools.showMessage(this.activity, activity.getResources().getString(R.string.allowMockMessage));
             }

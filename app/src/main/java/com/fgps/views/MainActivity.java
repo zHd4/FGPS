@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private MapView mapView;
     private GoogleMap googleMap;
 
-    public double latitude;
-    public double longitude;
+    public Coordinates coordinates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +44,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Coordinates currentCoords = geo.getCurrentLocation(this, getApplicationContext());
 
         if (currentCoords != null) {
-            latitude = currentCoords.getLatitude();
-            longitude = currentCoords.getLongitude();
+            this.coordinates = currentCoords;
         } else {
-            latitude = geo.getRandomLatitude();
-            longitude = geo.getRandomLongitude();
+            this.coordinates = geo.getRandomCoordinates();
         }
 
         randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                latitude = geo.getRandomLatitude();
-                longitude = geo.getRandomLongitude();
-
-                tools.setPointOnMap(googleMap, latitude, longitude);
+                MainActivity.this.coordinates = geo.getRandomCoordinates();
+                tools.setPointOnMap(googleMap, MainActivity.this.coordinates);
             }
         });
 
@@ -83,9 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        final Geo geo = new Geo();
-
-        tools.setPointOnMap(googleMap, latitude, longitude);
+        tools.setPointOnMap(googleMap, MainActivity.this.coordinates);
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -98,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.addMarker(markerOptions);
 
-                latitude = geo.roundCoordinate(latLng.latitude);
-                longitude = geo.roundCoordinate(latLng.longitude);
+                MainActivity.this.coordinates = new Coordinates(latLng.latitude, latLng.longitude);
             }
         });
     }
