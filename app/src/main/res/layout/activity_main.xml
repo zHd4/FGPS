@@ -37,31 +37,6 @@
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintHorizontal_bias="0.95" app:layout_constraintVertical_bias="0.83"/>
-        <EditText
-                android:layout_width="170dp"
-                android:layout_height="30dp"
-                android:inputType="numberSigned|numberDecimal"
-                android:ems="10"
-                android:hint="@string/latitude"
-                android:id="@+id/latitude" app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.00999999"
-                android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/colorAccent" app:layout_constraintHorizontal_bias="0.03"
-                android:background="@color/colorPrimaryDark" tools:ignore="Autofill"/>
-        <EditText
-                android:layout_width="170dp"
-                android:layout_height="30dp"
-                android:inputType="numberSigned|numberDecimal"
-                android:ems="10"
-                android:hint="@string/longitude"
-                android:id="@+id/longitude" app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.00999999"
-                android:textColor="@android:color/background_light" android:textColorHint="@android:color/darker_gray"
-                android:textColorLink="@color/colorAccent"
-                android:background="@color/colorPrimaryDark" app:layout_constraintHorizontal_bias="0.79"
-                tools:ignore="Autofill"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +48,7 @@
                 android:tint="#FFFFFF"/>
         <com.google.android.gms.maps.MapView
                 android:layout_width="0dp"
-                android:layout_height="520dp" android:id="@+id/mapView"
+                android:layout_height="0dp" android:id="@+id/mapView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.94"

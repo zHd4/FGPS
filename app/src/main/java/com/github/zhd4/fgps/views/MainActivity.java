@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.zhd4.fgps.R;
-import com.github.zhd4.fgps.controllers.EditTextOnChangedController;
 import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
@@ -27,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private MapView mapView;
     private GoogleMap googleMap;
 
+    public double latitude;
+    public double longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,35 +40,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         FloatingActionButton randomCoordinatesButton = findViewById(R.id.randomCoordinatesButton);
         final FloatingActionButton toggleGpsButton = findViewById(R.id.toggleGPS);
 
-        final EditText latitude = findViewById(R.id.latitude);
-        final EditText longitude = findViewById(R.id.longitude);
-
         final Geo geo = new Geo();
 
         Coordinates currentCoords = geo.getCurrentLocation(this, getApplicationContext());
 
         if (currentCoords != null) {
-            latitude.setText(String.valueOf(currentCoords.getLatitude()));
-            longitude.setText(String.valueOf(currentCoords.getLongitude()));
+            latitude = currentCoords.getLatitude();
+            longitude = currentCoords.getLongitude();
         } else {
-            tools.setRandomCoordinates(latitude, longitude, geo);
+            latitude = geo.getRandomLatitude();
+            longitude = geo.getRandomLongitude();
         }
 
         randomCoordinatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tools.setRandomCoordinates(latitude, longitude, geo);
+                latitude = geo.getRandomLatitude();
+                longitude = geo.getRandomLongitude();
+
                 tools.setPointOnMap(googleMap, latitude, longitude);
             }
         });
 
         toggleGpsButton.setOnClickListener(new ToggleGpsOnClickController(
-                geo,
-                getApplicationContext(),
-                this,
-                latitude,
-                longitude,
-                toggleGpsButton
+                geo, getApplicationContext(),
+                this, toggleGpsButton
         ));
 
         Bundle mapViewBundle = null;
@@ -87,8 +84,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.googleMap = googleMap;
 
         final Geo geo = new Geo();
-        final EditText latitude = findViewById(R.id.latitude);
-        final EditText longitude = findViewById(R.id.longitude);
 
         tools.setPointOnMap(googleMap, latitude, longitude);
 
@@ -103,17 +98,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.addMarker(markerOptions);
 
-                EditTextOnChangedController.setIgnoring(true);
-
-                latitude.setText(String.valueOf(geo.roundCoordinate(latLng.latitude)));
-                longitude.setText(String.valueOf(geo.roundCoordinate(latLng.longitude)));
-
-                EditTextOnChangedController.setIgnoring(false);
+                latitude = geo.roundCoordinate(latLng.latitude);
+                longitude = geo.roundCoordinate(latLng.longitude);
             }
         });
-
-        latitude.addTextChangedListener(new EditTextOnChangedController(latitude, longitude, googleMap));
-        longitude.addTextChangedListener(new EditTextOnChangedController(latitude, longitude, googleMap));
     }
 
     @Override

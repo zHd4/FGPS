@@ -1,44 +1,34 @@
 package com.github.zhd4.fgps.controllers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.EditText;
 import com.github.zhd4.fgps.models.tools.GUITools;
 import com.github.zhd4.fgps.R;
 import com.github.zhd4.fgps.models.geo.Coordinates;
 import com.github.zhd4.fgps.models.geo.Geo;
+import com.github.zhd4.fgps.views.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ToggleGpsOnClickController implements View.OnClickListener {
     private final Geo geo;
     private final Context context;
-    private final Activity activity;
-    
-    private final EditText latitude;
-    private final EditText longitude;
+    private final MainActivity activity;
     private final FloatingActionButton toggleGpsButton;
 
     private boolean running;
 
-    public ToggleGpsOnClickController(Geo geo, Context context, Activity activity,
-                                      EditText latitude, EditText longitude, FloatingActionButton toggleGpsButton) {
+    public ToggleGpsOnClickController(Geo geo, Context context, MainActivity mainActivity,
+                                      FloatingActionButton toggleGpsButton) {
         this.geo = geo;
         this.context = context;
-        this.activity = activity;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.activity = mainActivity;
         this.toggleGpsButton = toggleGpsButton;
     }
 
     @Override
     public void onClick(View view) {
-        Coordinates coordinates = new Coordinates(
-                Double.parseDouble(latitude.getText().toString()),
-                Double.parseDouble(longitude.getText().toString())
-        );
-
+        Coordinates coordinates = new Coordinates(activity.latitude, activity.longitude);
         MockLocationController mockController = new MockLocationController(activity, geo);
 
         if(!this.running) {
