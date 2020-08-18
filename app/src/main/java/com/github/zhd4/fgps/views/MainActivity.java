@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps;
+package com.github.zhd4.fgps.views;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import com.github.zhd4.fgps.R;
 import com.github.zhd4.fgps.controllers.EditTextOnChangedController;
 import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
 import com.github.zhd4.fgps.models.geo.Coordinates;

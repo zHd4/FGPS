@@ -16,7 +16,7 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyByFpN5zWZOulEK8NXTcum3RI83NLKYJKU"/>
-        <activity android:name=".MainActivity" android:screenOrientation="locked">
+        <activity android:name=".views.MainActivity" android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

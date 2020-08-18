@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.github.zhd4.fgps.MainActivity">
+      tools:context="com.github.zhd4.fgps.views.MainActivity">
     <item android:id="@+id/actionAbout"
           android:title="@string/action_about"
           android:orderInCategory="100"
