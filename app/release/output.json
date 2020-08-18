@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.github.zhd4.fgps",
+  "applicationId": "com.fgps",
   "variantName": "release",
   "elements": [
     {

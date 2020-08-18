@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps.models.geo;
+package com.fgps.models.geo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

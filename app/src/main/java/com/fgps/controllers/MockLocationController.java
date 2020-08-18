@@ -1,9 +1,9 @@
-package com.github.zhd4.fgps.controllers;
+package com.fgps.controllers;
 
 import android.app.Activity;
-import com.github.zhd4.fgps.models.geo.Coordinates;
-import com.github.zhd4.fgps.models.geo.Geo;
-import com.github.zhd4.fgps.models.geo.MockingLocationRunnable;
+import com.fgps.models.geo.Coordinates;
+import com.fgps.models.geo.Geo;
+import com.fgps.models.geo.MockingLocationRunnable;
 
 public class MockLocationController {
     private final Geo geo;

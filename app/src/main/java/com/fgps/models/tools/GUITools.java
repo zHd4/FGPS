@@ -1,4 +1,4 @@
-package com.github.zhd4.fgps.models.tools;
+package com.fgps.models.tools;
 
 import android.app.Activity;
 import android.content.Context;

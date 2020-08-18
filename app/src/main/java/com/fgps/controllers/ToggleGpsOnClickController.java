@@ -1,13 +1,13 @@
-package com.github.zhd4.fgps.controllers;
+package com.fgps.controllers;
 
+import com.fgps.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
-import com.github.zhd4.fgps.models.tools.GUITools;
-import com.github.zhd4.fgps.R;
-import com.github.zhd4.fgps.models.geo.Coordinates;
-import com.github.zhd4.fgps.models.geo.Geo;
-import com.github.zhd4.fgps.views.MainActivity;
+import com.fgps.models.tools.GUITools;
+import com.fgps.models.geo.Coordinates;
+import com.fgps.models.geo.Geo;
+import com.fgps.views.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ToggleGpsOnClickController implements View.OnClickListener {

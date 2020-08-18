@@ -1,9 +1,9 @@
-package com.github.zhd4.fgps.models.tools;
+package com.fgps.models.tools;
 
 import android.Manifest;
 import android.app.Activity;
 import androidx.core.app.ActivityCompat;
-import com.github.zhd4.fgps.models.geo.Coordinates;
+import com.fgps.models.geo.Coordinates;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;

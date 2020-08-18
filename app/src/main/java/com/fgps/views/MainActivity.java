@@ -1,16 +1,16 @@
-package com.github.zhd4.fgps.views;
+package com.fgps.views;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import com.github.zhd4.fgps.R;
-import com.github.zhd4.fgps.controllers.ToggleGpsOnClickController;
-import com.github.zhd4.fgps.models.geo.Coordinates;
-import com.github.zhd4.fgps.models.geo.Geo;
-import com.github.zhd4.fgps.models.tools.GUITools;
-import com.github.zhd4.fgps.models.tools.MainActivityTools;
+import com.fgps.R;
+import com.fgps.controllers.ToggleGpsOnClickController;
+import com.fgps.models.geo.Coordinates;
+import com.fgps.models.geo.Geo;
+import com.fgps.models.tools.GUITools;
+import com.fgps.models.tools.MainActivityTools;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
