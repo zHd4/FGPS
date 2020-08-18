@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">FGPS</string>
-    <string name="action_about">About</string>
+    <string name="appName">FGPS</string>
+    <string name="actionSettings">Settings</string>
+    <string name="actionAbout">About</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="allowMockMessage">
