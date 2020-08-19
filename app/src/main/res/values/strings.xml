@@ -12,4 +12,6 @@
     <string name="aboutText">
         Coded by zHd4\n(Telegram: @zhd4official)\n\nIcon created by Qfinel\n(Telegram: @Qfinel)
     </string>
+    <string name="accuracy">Accuracy</string>
+    <string name="set_gps_fix_accuracy_value_in_meters">Set GPS fix accuracy value in meters</string>
 </resources>

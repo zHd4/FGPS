@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_height="match_parent"
+                                                   android:background="@color/colorPrimaryDark">
 
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:id="@+id/accuracyTitleRow">
+            <TextView
+                    android:text="@string/accuracy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/accuracyTitle"
+                    android:textColor="@color/design_default_color_background"
+                    android:textSize="20sp" android:paddingTop="5dp" android:paddingBottom="5dp"
+                    android:paddingLeft="20dp" android:paddingRight="20dp"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:id="@+id/accuracyTextRow">
+            <TextView
+                    android:text="@string/set_gps_fix_accuracy_value_in_meters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/accuracyText"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" android:paddingTop="0dp" android:paddingBottom="10dp"
+                    android:paddingLeft="20dp" android:paddingRight="20dp"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:background="@color/colorPrimary" android:paddingTop="1dp"/>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
