@@ -1,6 +1,7 @@
 package com.fgps.controllers;
 
 import android.app.Activity;
+import com.fgps.models.MockLocationResult;
 import com.fgps.models.geo.Coordinates;
 import com.fgps.models.geo.Geo;
 import com.fgps.models.geo.MockingLocationRunnable;

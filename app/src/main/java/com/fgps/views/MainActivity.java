@@ -8,8 +8,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.fgps.R;
 import com.fgps.controllers.onclick.ToggleGpsController;
+import com.fgps.controllers.sqlite.SettingsController;
+import com.fgps.models.Settings;
 import com.fgps.models.geo.Coordinates;
 import com.fgps.models.geo.Geo;
+import com.fgps.models.geo.MockingLocationRunnable;
 import com.fgps.models.tools.GUITools;
 import com.fgps.models.tools.MainActivityTools;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        loadSettings();
 
         mapView = findViewById(R.id.mapView);
 
@@ -119,6 +123,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         return true;
+    }
+
+    private void loadSettings() {
+        SettingsController settingsController = new SettingsController(MainActivity.this);
+
+        if(settingsController.get(Settings.ACCURACY.toString()) == null) {
+            settingsController.set(Settings.ACCURACY.toString(), String.valueOf(Geo.accuracy));
+            settingsController.set(
+                    Settings.UPDATE_INTERVAL.toString(),
+                    String.valueOf(MockingLocationRunnable.interval)
+            );
+        }
+
+        Geo.accuracy = Integer.parseInt(settingsController.get(Settings.ACCURACY.toString()));
+        MockingLocationRunnable.interval =
+                Integer.parseInt(settingsController.get(Settings.UPDATE_INTERVAL.toString()));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.fgps.controllers;
+package com.fgps.models;
 
 public enum MockLocationResult {
     SUCCESS, FAIL

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import com.fgps.controllers.MockLocationController;
-import com.fgps.controllers.MockLocationResult;
+import com.fgps.models.MockLocationResult;
 import com.fgps.models.tools.GUITools;
 import com.fgps.models.geo.Geo;
 import com.fgps.views.MainActivity;

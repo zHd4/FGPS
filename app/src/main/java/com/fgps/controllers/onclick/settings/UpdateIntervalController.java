@@ -8,6 +8,8 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import com.fgps.R;
+import com.fgps.controllers.sqlite.SettingsController;
+import com.fgps.models.Settings;
 import com.fgps.models.geo.MockingLocationRunnable;
 
 public class UpdateIntervalController implements View.OnClickListener {
@@ -39,6 +41,10 @@ public class UpdateIntervalController implements View.OnClickListener {
 
                     if(interval >= 100 && interval <= 120000) {
                         MockingLocationRunnable.interval = interval;
+                        SettingsController settingsController = new SettingsController(context);
+
+                        MockingLocationRunnable.interval =
+                                Integer.parseInt(settingsController.get(Settings.UPDATE_INTERVAL.toString()));
                     }
                 } catch (NumberFormatException ignored) { }
             }

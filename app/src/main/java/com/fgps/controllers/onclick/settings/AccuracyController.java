@@ -9,6 +9,8 @@ import android.view.View;
 import android.app.AlertDialog;
 import android.widget.EditText;
 import com.fgps.R;
+import com.fgps.controllers.sqlite.SettingsController;
+import com.fgps.models.Settings;
 import com.fgps.models.geo.Geo;
 
 public class AccuracyController implements View.OnClickListener {
@@ -44,6 +46,9 @@ public class AccuracyController implements View.OnClickListener {
 
                     if(geo.testAccuracy(activity, accuracy)) {
                         Geo.accuracy = accuracy;
+                        SettingsController settingsController = new SettingsController(context);
+
+                        settingsController.set(Settings.ACCURACY.toString(), String.valueOf(Geo.accuracy));
                     }
                 } catch (NumberFormatException ignored) { }
             }
