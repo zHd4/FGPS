@@ -14,4 +14,6 @@
     </string>
     <string name="accuracy">Accuracy</string>
     <string name="set_gps_fix_accuracy_value_in_meters">Set GPS fix accuracy value in meters</string>
+    <string name="update_interval">Update interval</string>
+    <string name="set_location_update_interval_in_milliseconds">Set location update interval in milliseconds</string>
 </resources>

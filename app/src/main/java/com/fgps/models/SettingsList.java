@@ -4,6 +4,7 @@ import android.view.View;
 import com.fgps.R;
 import android.content.res.Resources;
 import com.fgps.controllers.AccuracySettingsOnClickController;
+import com.fgps.controllers.UpdateIntervalSettingsOnClickController;
 
 import java.util.Arrays;
 
@@ -41,6 +42,12 @@ public class SettingsList {
                 this.resources.getString(R.string.accuracy),
                 this.resources.getString(R.string.set_gps_fix_accuracy_value_in_meters),
                 new AccuracySettingsOnClickController()
+        );
+
+        add(this.resources.getString(
+                R.string.update_interval),
+                this.resources.getString(R.string.set_location_update_interval_in_milliseconds),
+                new UpdateIntervalSettingsOnClickController()
         );
     }
 

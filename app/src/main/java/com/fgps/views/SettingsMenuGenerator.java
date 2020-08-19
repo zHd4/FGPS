@@ -61,7 +61,7 @@ public class SettingsMenuGenerator {
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
-        titleView.setTextSize(20);
+        titleView.setTextSize(18);
         valueView.setTextSize(14);
 
         titleView.setText(name);
@@ -76,8 +76,8 @@ public class SettingsMenuGenerator {
         titleRow.addView(titleView);
         valueRow.addView(valueView);
 
-        titleRow.setPadding(50, 0, 0, 0);
-        valueRow.setPadding(50, 0, 0, 0);
+        titleRow.setPadding(50, 20, 0, 0);
+        valueRow.setPadding(50, 0, 0, 20);
 
         titleRow.setOnClickListener(listener);
         valueRow.setOnClickListener(listener);
