@@ -1,4 +1,4 @@
-package com.fgps.controllers;
+package com.fgps.views;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,12 +8,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import com.fgps.models.SettingsList;
 
-public class SettingsGenerationController {
+public class SettingsMenuGenerator {
     private final Context context;
     private final TableLayout layout;
     private final SettingsList settingsList;
 
-    public SettingsGenerationController(Context context, TableLayout tableLayout, SettingsList settingsList) {
+    public SettingsMenuGenerator(Context context, TableLayout tableLayout, SettingsList settingsList) {
         this.context = context;
         this.layout = tableLayout;
         this.settingsList = settingsList;

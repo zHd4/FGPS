@@ -5,7 +5,6 @@ import com.fgps.R;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.fgps.controllers.SettingsGenerationController;
 import com.fgps.models.SettingsList;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.actionSettings);
 
-        new SettingsGenerationController(
+        new SettingsMenuGenerator(
                 getApplicationContext(),
                 this.<TableLayout>findViewById(R.id.settingsTableLayout),
                 new SettingsList(getResources())
