@@ -13,6 +13,8 @@ import android.os.SystemClock;
 import androidx.core.app.ActivityCompat;
 
 public class Geo {
+    public static int accuracy = 1;
+
     static {
         System.loadLibrary("native-lib");
     }
@@ -28,23 +30,13 @@ public class Geo {
 
     public boolean mockLocation(Activity activity, Coordinates coordinates) {
         try {
-            LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-            String provider = manager.getBestProvider(new Criteria(), false);
+            LocationManager manager = createManager(activity);
+            String provider = getBestProvider(manager);
             Location location = this.createNewLocation(coordinates, provider);
 
-            try {
-                manager.addTestProvider(
-                        provider,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        1,
-                        1);
-            } catch (IllegalArgumentException ignored) { }
+            manager = prepareManager(manager, provider, accuracy);
+
+            assert manager != null;
 
             manager.setTestProviderEnabled(provider, true);
             manager.setTestProviderLocation(provider, location);
@@ -87,6 +79,42 @@ public class Geo {
         try {
             return new Coordinates(roundCoordinate(location.getLatitude()), roundCoordinate(location.getLongitude()));
         } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    public boolean testAccuracy(Activity activity, int accuracy) {
+        LocationManager manager = createManager(activity);
+        String provider = getBestProvider(manager);
+
+        return prepareManager(manager, provider, accuracy) != null;
+    }
+
+    private LocationManager createManager(Activity activity) {
+        return (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    private String getBestProvider(LocationManager manager) {
+        return manager.getBestProvider(new Criteria(), false);
+    }
+
+    private LocationManager prepareManager(final LocationManager manager, String provider, int accuracy) {
+        try {
+            manager.addTestProvider(
+                    provider,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true,
+                    1,
+                    accuracy);
+
+            return manager;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

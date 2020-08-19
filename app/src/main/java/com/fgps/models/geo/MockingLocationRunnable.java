@@ -3,6 +3,8 @@ package com.fgps.models.geo;
 import android.app.Activity;
 
 public class MockingLocationRunnable implements Runnable {
+    public static int interval = 1000;
+
     private final Geo geo;
     private final Activity activity;
     private final Coordinates coordinates;
@@ -18,7 +20,7 @@ public class MockingLocationRunnable implements Runnable {
     public void run() {
         while (geo.mockLocation(activity, coordinates)) {
             try {
-                Thread.sleep(700);
+                Thread.sleep(interval);
             } catch (InterruptedException ignored) { }
         }
 

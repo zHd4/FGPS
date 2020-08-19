@@ -22,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         new SettingsMenuGenerator(
                 getApplicationContext(),
                 this.<TableLayout>findViewById(R.id.settingsTableLayout),
-                new SettingsList(getResources())
+                new SettingsList(SettingsActivity.this, SettingsActivity.this, getResources())
         ).generateTable();
     }
 

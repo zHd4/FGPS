@@ -1,5 +1,7 @@
 package com.fgps.models;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import com.fgps.R;
 import android.content.res.Resources;
@@ -12,11 +14,15 @@ public class SettingsList {
     private String[][] settings;
     private View.OnClickListener[] settingsListeners;
 
+    private final Context context;
+    private final Activity activity;
     private final Resources resources;
 
-    public SettingsList(Resources resources) {
+    public SettingsList(Context context, Activity activity, Resources resources) {
         this.settings = new String[0][];
         this.settingsListeners = new View.OnClickListener[0];
+        this.context = context;
+        this.activity = activity;
         this.resources = resources;
         initArray();
     }
@@ -41,13 +47,13 @@ public class SettingsList {
         add(
                 this.resources.getString(R.string.accuracy),
                 this.resources.getString(R.string.set_gps_fix_accuracy_value_in_meters),
-                new AccuracySettingsOnClickController()
+                new AccuracySettingsOnClickController(this.context, this.activity, this.resources)
         );
 
         add(this.resources.getString(
                 R.string.update_interval),
                 this.resources.getString(R.string.set_location_update_interval_in_milliseconds),
-                new UpdateIntervalSettingsOnClickController()
+                new UpdateIntervalSettingsOnClickController(this.context, this.resources)
         );
     }
 
