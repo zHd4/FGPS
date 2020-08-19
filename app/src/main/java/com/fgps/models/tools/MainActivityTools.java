@@ -16,7 +16,11 @@ public class MainActivityTools {
         googleMap.clear();
         googleMap.setMinZoomPreference(4);
 
-        googleMap.addMarker(new MarkerOptions().position(latLng));
+        googleMap.addMarker(
+                new MarkerOptions()
+                        .position(latLng)
+                        .title(String.format("%s, %s", coordinates.getLatitude(), coordinates.getLongitude()))
+        );
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
