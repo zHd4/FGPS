@@ -43,10 +43,12 @@ public class UpdateIntervalController implements View.OnClickListener {
                         MockingLocationRunnable.interval = interval;
                         SettingsController settingsController = new SettingsController(context);
 
-                        MockingLocationRunnable.interval =
-                                Integer.parseInt(settingsController.get(Settings.UPDATE_INTERVAL.toString()));
+                        settingsController.set(
+                                Settings.UPDATE_INTERVAL.toString(),
+                                String.valueOf(MockingLocationRunnable.interval)
+                        );
                     }
-                } catch (NumberFormatException ignored) { }
+                } catch (NumberFormatException ignored) {  }
             }
         });
 
