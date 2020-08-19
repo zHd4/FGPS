@@ -50,6 +50,9 @@ public class SettingsGenerationController {
         TableRow titleRow = new TableRow(this.context);
         TableRow valueRow = new TableRow(this.context);
 
+        TextView titleView = new TextView(this.context);
+        TextView valueView = new TextView(this.context);
+
         titleRow.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
@@ -57,9 +60,6 @@ public class SettingsGenerationController {
         valueRow.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
-
-        TextView titleView = new TextView(this.context);
-        TextView valueView = new TextView(this.context);
 
         titleView.setTextSize(20);
         valueView.setTextSize(14);
@@ -75,6 +75,9 @@ public class SettingsGenerationController {
 
         titleRow.addView(titleView);
         valueRow.addView(valueView);
+
+        titleRow.setPadding(50, 0, 0, 0);
+        valueRow.setPadding(50, 0, 0, 0);
 
         titleRow.setOnClickListener(listener);
         valueRow.setOnClickListener(listener);

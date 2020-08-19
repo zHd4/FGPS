@@ -1,9 +1,12 @@
 package com.fgps.views;
 
+import android.widget.TableLayout;
 import com.fgps.R;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import com.fgps.controllers.SettingsGenerationController;
+import com.fgps.models.SettingsList;
 
 public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.actionSettings);
+
+        new SettingsGenerationController(
+                getApplicationContext(),
+                this.<TableLayout>findViewById(R.id.settingsTableLayout),
+                new SettingsList(getResources())
+        ).generateTable();
     }
 
     @Override
