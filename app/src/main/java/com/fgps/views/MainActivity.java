@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.fgps.R;
-import com.fgps.controllers.ToggleGpsOnClickController;
+import com.fgps.controllers.onclick.ToggleGpsController;
 import com.fgps.models.geo.Coordinates;
 import com.fgps.models.geo.Geo;
 import com.fgps.models.tools.GUITools;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        toggleGpsButton.setOnClickListener(new ToggleGpsOnClickController(
+        toggleGpsButton.setOnClickListener(new ToggleGpsController(
                 geo, getApplicationContext(),
                 this, toggleGpsButton
         ));

@@ -1,15 +1,17 @@
-package com.fgps.controllers;
+package com.fgps.controllers.onclick;
 
 import com.fgps.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import com.fgps.controllers.MockLocationController;
+import com.fgps.controllers.MockLocationResult;
 import com.fgps.models.tools.GUITools;
 import com.fgps.models.geo.Geo;
 import com.fgps.views.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ToggleGpsOnClickController implements View.OnClickListener {
+public class ToggleGpsController implements View.OnClickListener {
     private final Geo geo;
     private final Context context;
     private final MainActivity activity;
@@ -17,8 +19,8 @@ public class ToggleGpsOnClickController implements View.OnClickListener {
 
     private boolean running;
 
-    public ToggleGpsOnClickController(Geo geo, Context context, MainActivity mainActivity,
-                                      FloatingActionButton toggleGpsButton) {
+    public ToggleGpsController(Geo geo, Context context, MainActivity mainActivity,
+                               FloatingActionButton toggleGpsButton) {
         this.geo = geo;
         this.context = context;
         this.activity = mainActivity;

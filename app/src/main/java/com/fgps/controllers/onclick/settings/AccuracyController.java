@@ -1,44 +1,49 @@
-package com.fgps.controllers;
+package com.fgps.controllers.onclick.settings;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.text.InputType;
 import android.view.View;
+import android.app.AlertDialog;
 import android.widget.EditText;
 import com.fgps.R;
-import com.fgps.models.geo.MockingLocationRunnable;
+import com.fgps.models.geo.Geo;
 
-public class UpdateIntervalSettingsOnClickController implements View.OnClickListener {
+public class AccuracyController implements View.OnClickListener {
     private final Context context;
+    private final Activity activity;
     private final Resources resources;
 
-    public UpdateIntervalSettingsOnClickController(Context context, Resources resources) {
+    public AccuracyController(Context context, Activity activity, Resources resources) {
         this.context = context;
+        this.activity = activity;
         this.resources = resources;
     }
 
     @Override
     public void onClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(this.resources.getString(R.string.update_interval));
+        builder.setTitle(this.resources.getString(R.string.accuracy));
 
         final EditText input = new EditText(context);
 
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        input.setText(String.valueOf(MockingLocationRunnable.interval));
+        input.setText(String.valueOf(Geo.accuracy));
 
         builder.setView(input);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                try {
-                    int interval = Integer.parseInt(input.getText().toString());
+                final Geo geo = new Geo();
 
-                    if(interval >= 100 && interval <= 120000) {
-                        MockingLocationRunnable.interval = interval;
+                try {
+                    int accuracy = Integer.parseInt(input.getText().toString());
+
+                    if(geo.testAccuracy(activity, accuracy)) {
+                        Geo.accuracy = accuracy;
                     }
                 } catch (NumberFormatException ignored) { }
             }
